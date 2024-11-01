@@ -37,8 +37,8 @@ namespace NotEnoughMadness.MapMaking
         [Tooltip("Fmod event path to play when someone enters.")]
         public string enterSound;
 
-        [Tooltip("Fmod event path to play when someone exits.")]
-        public string exitSound;
+        [Tooltip("Fmod event path to play when someone leaves.")]
+        public string leaveSound;
 
         [Tooltip("Fmod event path to play when amLocked is true.")]
         public string lockSound;

@@ -103,6 +103,26 @@ namespace NotEnoughMadness.MapMaking
 
             Entrance_Base entrance = gameObject.AddComponent<Entrance_Base>();
 
+            entrance.PressEnterText = pressEnterText;
+            entrance.PressEnterRange = pressEnterRange;
+
+            entrance.amLocked = amLocked;
+            entrance.UsersIntangibleOnEnter = usersIntangibleOnEnter;
+            entrance.UsersInvincible = usersInvincible;
+            entrance.UsersUntargetable = usersUntargetable;
+
+            entrance.VocationProhibited = (VocationList)(int)vocationProhibited;
+            entrance.VocationRequirement = (VocationList)(int)vocationRequirement;
+
+            entrance.EnterPoint = enterPoint;
+            entrance.myUIPoint = uiPoint;
+
+            entrance.EnterSound = enterSound;
+            entrance.LeaveSound = leaveSound;
+            entrance.LockSound = lockSound;
+
+            // enter, exit, idle animations
+
             entrance.AccessLights = accessLights;
 
             // CharacterQueue (dont need to add i think)
