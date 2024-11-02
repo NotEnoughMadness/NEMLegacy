@@ -51,7 +51,7 @@ namespace NotEnoughMadness.MapMaking
             MapManager.OnConnectMapComponents += OnConnectMapComponents;
         }
 
-        void OnCreateMapComponents(object sender, EventArgs e)
+        public void OnCreateMapComponents(object sender, EventArgs e)
         {
             Entrance_AddonEffects addon = gameObject.AddComponent<Entrance_AddonEffects>();
 
@@ -80,7 +80,7 @@ namespace NotEnoughMadness.MapMaking
             addon.SpawnEffects = newSpawnEffectsList;
         }
 
-        void OnConnectMapComponents(object sender, EventArgs e)
+        public void OnConnectMapComponents(object sender, EventArgs e)
         {
             Entrance_AddonEffects addon = gameObject.GetComponent<Entrance_AddonEffects>();
 

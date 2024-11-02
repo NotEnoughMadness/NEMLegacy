@@ -356,6 +356,12 @@ namespace NotEnoughMadness
             // this is to establish an ORDER OF EXECUTIONNNNNNNN
             // otherwise everything will fall apart! it already did in fact!!! graaaaagrhghhgrhrrhg 
 
+            foreach(var cam in FindObjectsOfType<NEM_Cam_Main>())
+            {
+                MapManager.OnCreateMapComponents += cam.OnCreateMapComponents;
+                MapManager.OnConnectMapComponents += cam.OnConnectMapComponents;
+            }
+
             foreach(var emitter in FindObjectsOfType<NEM_StudioEventEmitter_Swain>())
             {
                 MapManager.OnCreateMapComponents += emitter.OnCreateMapComponents;

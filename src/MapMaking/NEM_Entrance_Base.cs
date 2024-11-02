@@ -1,8 +1,5 @@
-﻿using JetBrains.Annotations;
-using NotEnoughMadness.Classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace NotEnoughMadness.MapMaking
