@@ -1,11 +1,8 @@
 ﻿using FMODUnity;
-using NotEnoughMadness.Classes;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Scripting;
 
 namespace NotEnoughMadness.MapMaking
 {
@@ -13,6 +10,47 @@ namespace NotEnoughMadness.MapMaking
     // https://docs.unity3d.com/ScriptReference/PropertyDrawer.html
     // ^^ Something useful for making the unity inspector nicer for editing 
     // something to do down the line maybe
+
+
+    // (note to s3l-f)
+    // ramblings of a madman:
+    /*
+     * ---
+     * Making NEM components *might* be unfeasible 👽
+     * There's a lot of race conditions 
+     * The components don't 'just work' and require lots of custom code and conversions
+     * It seems to be very buggy despite the established order of execution in NEMMenu.cs onSceneLoaded()
+     * 
+     * ---
+     * The first approach to custom map making was ok but very inconvenient (but ultimately it *WORKED*, unlike the others)
+     * M:PN classes had to be manually stripped of most of their code with just the fields remaining and saved as .cs files inside of unity
+     * Then NEM would swap out statcard references to the ingame ones at runtime
+     * 
+     * Automation of copying the MPN classes with a python script did not yield positive results 👽👽👽👽👽 (skill issue?)
+     * 
+     * ---
+     * Hollowing out Assembly-CSharp.dll with a mono cecil program seemed to work fine when viewed through DnSpy but Unity had lots of trouble trying to load the dll
+     *                                           (^^^ i had a few different approaches and attempts at that too)
+     *
+     * Like one time it loaded the dll but didn't recognize some classes as existing even though they did exist and were listed in the asset list 
+     * but couldn't be attached to gameobjects because they "didn't exist" 👽👽👽👽👽👽👽
+     * 
+     * Unity also frequently froze and even crashed a few times when trying to load the dlls, throwing errors such as stack overflow, or missing RDA     
+     * 
+     * ---
+     * The approach of combining NEM classes and copied M:PN classes did not work out because some components fired before NEM had the chance to swap them out and threw errors (Awake() methods and stuff)
+     *                       ( ^^^ NEM classes would hold data and swap out some fields in M:PN components at runtime, both NEM classes and M:PN classes existed as components on gameobjects in unity)
+     * 
+     * ---
+     * I think i will have to scrap the current approach and return to the first (in a different way)
+     * Recode all of M:PN classes with their fields and empty methods marked as extern in this NEM dll 
+     * Swap out statcard objects at runtime
+     * 
+     * This is quite a head scratcher 👽👽👽👽👽 an almost two years long venture 👽👽👽👽👽👽👽 im going crazy 👽👽👽👽👽👽👽👽👽👽👽👽👽 MAD, EVEN 👽👽👽👽👽👽👽👽👽👽👽👽👽👽👽👽👽👽👽👽👽👽👽👽👽👽
+     * 
+     * So many attempts
+     * Yet we and as we began 👽👽👽👽 The journey is going full circle 👽👽👽
+     */
 
     public class NEM_GameManager : MonoBehaviour
     {

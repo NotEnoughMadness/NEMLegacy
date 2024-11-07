@@ -24,10 +24,10 @@ namespace NotEnoughMadness.MapMaking
             Debug.Log("NEM: NEM_Cam_Main.OnCreateMapComponents called");
             gameObject.SetActive(false);
 
-            gameObject.tag = "MainCamera";
+            //gameObject.tag = "MainCamera";
 
-            Camera camera = myCamera;
-            if (!camera)
+            /*Camera camera = myCamera;
+            if (camera == null)
             {
                 // The camera settings here mirror VANILLA MPN CAMERA SETTINGS
 
@@ -90,11 +90,13 @@ namespace NotEnoughMadness.MapMaking
                 camera.allowDynamicResolution = false;
                 camera.targetDisplay = 0; // 0 is display 1 i think??
 
-            }
+            }*/
 
-            
+
 
             //Cam_Main cam = gameObject.AddComponent<Cam_Main>();
+
+            Destroy(gameObject.GetComponent<Camera>());
 
 
             GameObject cameraGamePrefab = Instantiate(Resources.Load("cameras/Camera_Game")) as GameObject;
@@ -109,8 +111,8 @@ namespace NotEnoughMadness.MapMaking
                 return;
             }
 
-            cam.myCamera = camera;
-            cam.myTransform = gameObject.transform;
+            //cam.myCamera = camera;
+            //cam.myTransform = gameObject.transform;
         }
 
         public void OnConnectMapComponents(object sender, EventArgs e)
@@ -118,28 +120,6 @@ namespace NotEnoughMadness.MapMaking
             Debug.Log("NEM: NEM_Cam_Main.OnConnectMapComponents called");
 
             gameObject.SetActive(true);
-        }
-
-        void Awake()
-        {
-            
-            /*
-
-            
-
-
-            // Create camera main from MPN
-
-            Cam_Main camMain = gameObject.AddComponent<Cam_Main>();
-            camMain.myCamera = camera; // camera from up there in the code
-            */
-
-            // ok ok instead of recreating manually, ,,  ,  INSTANTIATE PREFAB that exists in vanilla
-            /*
-
-
-            // COMMENCE SELF DESTRUCT SEQUENCE 
-            Destroy(gameObject);*/
         }
     }
 
