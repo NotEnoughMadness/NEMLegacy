@@ -348,6 +348,17 @@ namespace NotEnoughMadness
         {
             Debug.Log("NEM: Menu loaded scene \"" + scene.name + "\" with mode " + mode.ToString());
 
+            InteractiveMode interactiveComponent = GameObject.FindObjectOfType<InteractiveMode>();
+            if (interactiveComponent == null)
+            {
+                Debug.Log("NEM: InteractiveMode not found in scene \" " + scene.name + " \". Attaching InteractiveMode component to Game_Manager.currentManager.gameObject");
+
+                Game_Manager.currentManager.gameObject.AddComponent<InteractiveMode>();
+            }
+            interactiveComponent = null;
+            
+            
+
             Debug.Log("NEM: Subscribing events");
 
             // TODO:
