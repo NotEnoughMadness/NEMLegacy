@@ -21,6 +21,7 @@ namespace NotEnoughMadness
             // Create gameobject for the nem menu and add the component to it
 
             GameObject nemGameobject = new GameObject("NEMMenuObject");
+            
             nemGameobject.isStatic = true;
             nemGameobject.AddComponent<NEMMenu>();
             GameObject.DontDestroyOnLoad(nemGameobject);
