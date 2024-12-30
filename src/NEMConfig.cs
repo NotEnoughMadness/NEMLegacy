@@ -72,7 +72,7 @@ namespace NotEnoughMadness
 
         public static ConfigEntry<bool> UnlockInteractiveRestrictions = config.Bind(patchesQol, "UnlockInteractiveRestrictions", true, "In vanilla M:PN, interactive mode hides certain characters and weapons from the spawn menus. If this is true, it unhides those things.");
 
-        public static ConfigEntry<bool> CreateGhostOfferingPatch = config.Bind(patchesQol, "CreateGhostOfferingPatch", false, "Boosts the offering ghost creation chance to 50%.");
+        public static ConfigEntry<bool> CreateGhostOfferingPatch = config.Bind(patchesQol, "CreateGhostOfferingPatch", false, "Boosts the offering ghost creation chance to 100%.");
     }
 
 
