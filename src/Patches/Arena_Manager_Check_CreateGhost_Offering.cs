@@ -4,27 +4,27 @@ using UnityEngine.UIElements;
 
 namespace NotEnoughMadness.Patches
 {
-    //[HarmonyPatch(typeof(Arena_Manager), MethodType.Constructor)]
-    //class Arena_Manager_Constructor_Patch
-    //{
-    //    [HarmonyPostfix]
-    //    static void Postfix(Arena_Manager __instance)
-    //    {
-    //        if (NEMConfig.CreateGhostOfferingPatch.Value == false)
-    //        {
-    //            return;
-    //        }
+    [HarmonyPatch(typeof(Arena_Manager), MethodType.Constructor)]
+    class Arena_Manager_Constructor_Patch
+    {
+        [HarmonyPostfix]
+        static void Postfix(Arena_Manager __instance)
+        {
+            if (NEMConfig.CreateGhostOfferingPatch.Value == false)
+            {
+                return;
+            }
 
-    //        Traverse managerTraverse = Traverse.Create(__instance);
+            Traverse managerTraverse = Traverse.Create(__instance);
 
-    //        managerTraverse.Field("SummonGhostText").SetValue(new string[] { 
-    //            "CUSTOM TEXT WOOOOO",
-    //            "I am a customs guy",
-    //            "I RISE FROM THE DEEAAAD",
-    //            "GRAARGH BRAINSS"
-    //        });
-    //    }
-    //}
+            managerTraverse.Field("SummonGhostText").SetValue(new string[] {
+                "CUSTOM TEXT WOOOOO",
+                "I am a customs guy",
+                "I RISE FROM THE DEEAAAD",
+                "GRAARGH BRAINSS"
+            });
+        }
+    }
 
     [HarmonyPatch(typeof(Arena_Manager), "Check_CreateGhost_Offering")]
     class Arena_Manager_Check_CreateGhost_Offering

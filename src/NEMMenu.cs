@@ -30,7 +30,8 @@ namespace NotEnoughMadness
         {
             {"GodMode", false},
             {"InfiniteAmmo", false},
-            {"BottomlessMag", false}
+            {"BottomlessMag", false},
+            {"CriticalHits", false}
         };
 
         // THE MEAT
@@ -70,6 +71,10 @@ namespace NotEnoughMadness
                 if (GUILayout.Toggle(toggleBools["BottomlessMag"], "Bottomless Mag") != toggleBools["BottomlessMag"])
                 {
                     toggleBools["BottomlessMag"] = !toggleBools["BottomlessMag"];
+                }
+                if (GUILayout.Toggle(toggleBools["CriticalHits"], "Critical Hits") != toggleBools["CriticalHits"])
+                {
+                    toggleBools["CriticalHits"] = !toggleBools["CriticalHits"];
                 }
                 // Remote pickup toggle is changed to a normal button so it doesn't spam your traitlist with the same one trait and doesn't check everything every single frame
                 // It could be like the toggles up there if not for it remaining toggled when you swap characters to someone who doesn't have the trait
