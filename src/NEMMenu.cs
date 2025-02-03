@@ -372,6 +372,14 @@ namespace NotEnoughMadness
             // this is to establish an ORDER OF EXECUTIONNNNNNNN
             // otherwise everything will fall apart! it already did in fact!!! graaaaagrhghhgrhrrhg 
 
+
+
+
+
+            // TODO:::
+
+            // see if you can write a unity plugin to read bundles from mpn mods dir to display madobjs in the editor
+
             foreach(var cam in FindObjectsOfType<NEM_Cam_Main>())
             {
                 MapManager.OnCreateMapComponents += cam.OnCreateMapComponents;
