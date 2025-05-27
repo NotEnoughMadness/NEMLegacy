@@ -351,6 +351,12 @@ namespace NotEnoughMadness
 
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
+            // Fix for disabling god mode on scene transition
+            if (NEMMenu.toggleBools["GodMode"] == true)
+            {
+                Controller_Base.PlayerOne.MakeInvincible();
+            }
+
             Debug.Log("NEM: Menu loaded scene \"" + scene.name + "\" with mode " + mode.ToString());
 
             InteractiveMode interactiveComponent = GameObject.FindObjectOfType<InteractiveMode>();

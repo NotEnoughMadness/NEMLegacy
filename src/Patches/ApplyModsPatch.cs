@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using System;
 using System.IO;
 using UnityEngine;
 
@@ -31,11 +32,14 @@ namespace NotEnoughMadness.Patches
 
             FileReader.loadedBundles.Clear();
 
+            // Unload all code mods lol
+            //NEMLoader.FlushLoaderDomain();
+
             return true;
         }
     }
 
-
+    
 
     // This runs at the start of the game and every time you reapply mods (After the clearing above), tinker with it a bit to see if you can do everything HERE
     [HarmonyPatch(typeof(Mod_Manager), "CommitMods_MadObjs")]
@@ -54,9 +58,23 @@ namespace NotEnoughMadness.Patches
                 // CHECK DIRECTORY FOR .NEM FILES
                 foreach (FileInfo fileInfo in modItem.Directory.GetFiles("*", SearchOption.AllDirectories))
                 {
+                    // NEM ASSET BUNDLES
                     if (fileInfo.Extension == ".nem" || fileInfo.Extension == "")
                     {
                         FileReader.ProcessModBundle(fileInfo);
+                    }
+                    // CODE EXECUTION (danger 😱😱😱)
+                    if (fileInfo.Extension == ".dll")
+                    {
+                        // dont load if code execution is disabled
+                        if (NEMConfig.CodeExecutionModsOn.Value == false)
+                        {
+                            continue;
+                        }
+
+                        // LOADING ASSEMBLY
+
+                        NEMLoader.LoadPlugin(fileInfo.Name);
                     }
                 }
             }
