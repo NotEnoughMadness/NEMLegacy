@@ -76,6 +76,17 @@ namespace NotEnoughMadness.Patches
 
                         NEMLoader.LoadPlugin(fileInfo.Name);
                     }
+
+                    // ADDITIVE SCENE LOADING
+                    // loading more stuff on top of the current scene
+                    // MODIFYING LOADED SCENES
+                    // changing what's already inside a scene, dynamically looking stuff up
+
+                    // nem bundles have to be already loaded (higher up)
+                    if (fileInfo.Name == "NEMSceneData.json") 
+                    {
+                        FileReader.LoadSceneData(fileInfo.FullName);
+                    }
                 }
             }
 

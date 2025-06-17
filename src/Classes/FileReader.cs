@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using UnityEngine;
 
 namespace NotEnoughMadness
@@ -48,6 +46,18 @@ namespace NotEnoughMadness
 
             Debug.Log("NEM: Loaded bundle: " + fileInfo.Name);
             FileReader.loadedBundles.Add(loadedBundle);
+        }
+
+
+        public static Dictionary<string, SceneData> sceneData = new Dictionary<string, SceneData>();
+
+        /// <summary>
+        /// Loads scene data from json, for additively loading scenes (paths) and modifying at runtime.
+        /// </summary>
+        /// <param name="jsonPath"></param>
+        public static void LoadSceneData(string jsonPath)
+        {
+
         }
     }
 }
