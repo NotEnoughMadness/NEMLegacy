@@ -8,17 +8,23 @@ using UnityEngine;
 
 namespace NotEnoughMadness
 {
-    public class NEMLoader
+    public class AssemblyLoader
     {
         //AssemblyLoadContext
 
         static List<Assembly> loadedAssemblies = new List<Assembly>();
+
+        public static void Cleanup()
+        {
+            // handle cleanup logic here idk (clearing the list doesnt unload)
+        }
 
         public static void LoadPlugin(string assemblyPath)
         {
             Debug.Log("NEM: Loading assembly " + assemblyPath);
             Assembly newPlugin = null;
             try
+#pragma warning disable CS0168 // Variable is declared but never used
             {
                 newPlugin = Assembly.Load(assemblyPath);
             } catch(FileNotFoundException ex)
@@ -30,6 +36,7 @@ namespace NotEnoughMadness
                 Debug.Log("NEM: Error loading assembly " + assemblyPath);
                 Debug.Log(ex);
             }
+#pragma warning restore CS0168 // Variable is declared but never used
             
 
             if (newPlugin == null)

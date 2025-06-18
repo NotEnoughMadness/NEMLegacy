@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace NotEnoughMadness
 {
-    public static class FileReader
+    public static class AssetBundleLoader
     {
         // For custom bundles
         public static List<AssetBundle> loadedBundles = new List<AssetBundle>();
@@ -12,6 +12,24 @@ namespace NotEnoughMadness
 
         public static List<GameObject> missionMaps = new List<GameObject>();
        
+        public static void Cleanup()
+        {
+            AssetBundleLoader.customScenePaths.Clear();
+
+            foreach (AssetBundle loadedBundle in AssetBundleLoader.loadedBundles)
+            {
+                if (loadedBundle == null)
+                {
+                    Debug.Log("NEM: Ermmm what in the madness. The loaded bundle is null?");
+                    continue;
+                }
+
+                Debug.Log("NEM: Unloading bundle " + loadedBundle.name);
+                loadedBundle.Unload(true);
+            }
+
+            AssetBundleLoader.loadedBundles.Clear();
+        }
         
         public static void ProcessModBundle(FileInfo fileInfo)
         {
@@ -30,8 +48,8 @@ namespace NotEnoughMadness
                     if (missionMap.GetComponentInChildren<UI_MissionMap_Arena>() != null)
                     {
                         Debug.Log("NEM: ADDED UI_MISSIONMAP_ARENA TO LIST.");
-                        FileReader.missionMaps.Add(missionMap);
-                        Debug.Log("NEM: NEW LIST COUNT: " + FileReader.missionMaps.Count);
+                        AssetBundleLoader.missionMaps.Add(missionMap);
+                        Debug.Log("NEM: NEW LIST COUNT: " + AssetBundleLoader.missionMaps.Count);
                     }
                 }
 
@@ -41,23 +59,11 @@ namespace NotEnoughMadness
             foreach (string scenePath in loadedBundle.GetAllScenePaths())
             {
                 Debug.Log("NEM: Loaded scene: " + scenePath);
-                FileReader.customScenePaths.Add(scenePath);
+                AssetBundleLoader.customScenePaths.Add(scenePath);
             }
 
             Debug.Log("NEM: Loaded bundle: " + fileInfo.Name);
-            FileReader.loadedBundles.Add(loadedBundle);
-        }
-
-
-        public static Dictionary<string, SceneData> sceneData = new Dictionary<string, SceneData>();
-
-        /// <summary>
-        /// Loads scene data from json, for additively loading scenes (paths) and modifying at runtime.
-        /// </summary>
-        /// <param name="jsonPath"></param>
-        public static void LoadSceneData(string jsonPath)
-        {
-
+            AssetBundleLoader.loadedBundles.Add(loadedBundle);
         }
     }
 }

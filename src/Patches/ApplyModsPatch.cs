@@ -14,26 +14,11 @@ namespace NotEnoughMadness.Patches
         {
 
             // Clear custom scene paths and unload their bundles
-            Debug.Log("NEM: Unloading all scene paths and bundles.");
+            Debug.Log("NEM: Unloading all mods.");
 
-            FileReader.customScenePaths.Clear();
-
-            foreach (AssetBundle loadedBundle in FileReader.loadedBundles)
-            {
-                if (loadedBundle == null)
-                {
-                    Debug.Log("NEM: Ermmm what in the madness. The loaded bundle is null?");
-                    continue;
-                }
-
-                Debug.Log("NEM: Unloading bundle " + loadedBundle.name);
-                loadedBundle.Unload(true);
-            }
-
-            FileReader.loadedBundles.Clear();
-
-            // Unload all code mods lol
-            //NEMLoader.FlushLoaderDomain();
+            AssetBundleLoader.Cleanup();
+            SceneModLoader.Cleanup();
+            AssemblyLoader.Cleanup();
 
             return true;
         }
@@ -41,7 +26,7 @@ namespace NotEnoughMadness.Patches
 
     
 
-    // This runs at the start of the game and every time you reapply mods (After the clearing above), tinker with it a bit to see if you can do everything HERE
+    // This runs at the start of the game and every time you reapply mods (After the clearing above)
     [HarmonyPatch(typeof(Mod_Manager), "CommitMods_MadObjs")]
     public class Mod_Manager_CommitMods_MadObj
     {
@@ -61,7 +46,7 @@ namespace NotEnoughMadness.Patches
                     // NEM ASSET BUNDLES
                     if (fileInfo.Extension == ".nem" || fileInfo.Extension == "")
                     {
-                        FileReader.ProcessModBundle(fileInfo);
+                        AssetBundleLoader.ProcessModBundle(fileInfo);
                     }
                     // CODE EXECUTION (danger 😱😱😱)
                     if (fileInfo.Extension == ".dll")
@@ -74,7 +59,7 @@ namespace NotEnoughMadness.Patches
 
                         // LOADING ASSEMBLY
 
-                        NEMLoader.LoadPlugin(fileInfo.Name);
+                        AssemblyLoader.LoadPlugin(fileInfo.Name);
                     }
 
                     // ADDITIVE SCENE LOADING
@@ -85,7 +70,7 @@ namespace NotEnoughMadness.Patches
                     // nem bundles have to be already loaded (higher up)
                     if (fileInfo.Name == "NEMSceneData.json") 
                     {
-                        FileReader.LoadSceneData(fileInfo.FullName);
+                        SceneModLoader.LoadSceneData(fileInfo.FullName);
                     }
                 }
             }

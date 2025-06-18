@@ -175,14 +175,14 @@ namespace NotEnoughMadness
                     }
                     UI_Game.NewNotice("Unlocked every upgrade station, shop, world change, set highest tier to 100, beaten all arena stages on all difficulties.");
                 }
-                foreach (string scenePath in FileReader.customScenePaths)
+                foreach (string scenePath in AssetBundleLoader.customScenePaths)
                 {
                     if (GUILayout.Button(scenePath))
                     {
                         Game_Manager.GameTransitions.LoadScene(scenePath, Transitions_Main.TransitionType.WipeSide);
                     }
                 }
-                foreach (GameObject missionMap in FileReader.missionMaps)
+                foreach (GameObject missionMap in AssetBundleLoader.missionMaps)
                 {
                     if (GUILayout.Button(missionMap.name))
                     {
@@ -359,6 +359,7 @@ namespace NotEnoughMadness
 
             Debug.Log("NEM: Menu loaded scene \"" + scene.name + "\" with mode " + mode.ToString());
 
+            // Fix for interactive mode menus not working outside of playground mode in vanilla
             InteractiveMode interactiveComponent = GameObject.FindObjectOfType<InteractiveMode>();
             if (interactiveComponent == null)
             {
@@ -366,8 +367,6 @@ namespace NotEnoughMadness
 
                 Game_Manager.currentManager.gameObject.AddComponent<InteractiveMode>();
             }
-            interactiveComponent = null;
-            
             
 
             Debug.Log("NEM: Subscribing events");

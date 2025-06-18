@@ -32,6 +32,9 @@
     <Reference Include="Assembly-CSharp-firstpass">
       <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Madness Project Nexus 2\Madness Project Nexus_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Madness Project Nexus 2\Madness Project Nexus_Data\Managed\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.AssetBundleModule">
       <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Madness Project Nexus 2\Madness Project Nexus_Data\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
     </Reference>
