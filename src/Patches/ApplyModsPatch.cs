@@ -27,6 +27,9 @@ namespace NotEnoughMadness.Patches
     
 
     // This runs at the start of the game and every time you reapply mods (After the clearing above)
+
+    // TODO:
+    // ALL THIS was BROKEN with an update lol rip and i will check it out later at some point in teh future eventually for sure. perchance.
     [HarmonyPatch(typeof(Mod_Manager), "CommitMods_MadObjs")]
     public class Mod_Manager_CommitMods_MadObj
     {
@@ -38,7 +41,7 @@ namespace NotEnoughMadness.Patches
             // 
 
             // FOR ALL ENABLED MODS
-            foreach (Mod_Manager.ModItem modItem in Mod_Manager.ReturnAllMods(false))
+            foreach (ModItem modItem in Mod_Manager.ReturnAllMods(false))
             {
                 // CHECK DIRECTORY FOR .NEM FILES
                 foreach (FileInfo fileInfo in modItem.Directory.GetFiles("*", SearchOption.AllDirectories))
@@ -66,6 +69,7 @@ namespace NotEnoughMadness.Patches
                     // loading more stuff on top of the current scene
                     // MODIFYING LOADED SCENES
                     // changing what's already inside a scene, dynamically looking stuff up
+                    // there's an example below to explain the concept
 
                     // nem bundles have to be already loaded (higher up)
                     if (fileInfo.Name == "NEMSceneData.json") 
@@ -80,3 +84,66 @@ namespace NotEnoughMadness.Patches
         }
     }
 }
+
+
+// Example scene data json
+/*
+{
+	"arenahub_randomboxesandstuff": {
+		"additiveScenes": [
+			"loadinfinitesceneslol"
+		],
+		"modifications": {
+			"thecube": {
+				"components": {
+					"InteractiveNoteComponentIdk": {
+						"NoteText": "Etched into its surface are words: \"This cube... this cube has seen some things.. And some of them were cool. And some of them even cooler!",
+						"FireEventSystemEventIdkIDidntUseItMuchYet": "activateSpookyBadGuysBehindYou"
+					}
+				},
+				"tag": "Floor",
+				"layer": 0
+			}
+		}
+	},
+	"hub_arenamode": {
+		"additiveScenes": [
+			"arenahub_moreworldchanges",
+			"arenahub_randomboxesandstuff"
+		],
+		"modifications": {
+			"MainDoor": {
+				"components": {
+					"UnityEngine.BoxCollider": {
+						"enabled": false,
+						"isTrigger": true,
+                        "nonExistentProperty": 17,
+                        "existentProperty": invalidValue
+					},
+					"Rigidbody": {
+						"useGravity": false,
+						"mass": 2.5
+					},
+					"ModNamespace.ModdedComponent": {
+						"soundPath": "/music/smc5/club madblox"
+					},
+					"ModdedComponentWithNoNamespace": {
+						"characterCardToSpawn": "Hank"
+					},
+					"InvalidNonExistingComponent": {
+						"value": 123
+					}
+				}
+			},
+			"MainDoor/DoorKnob (aka path to the specific gameobject youre modifying)": {
+				"position": { "x": 0.2, "y": 1.0, "z": 0.0 },
+				"components": {
+					"MeshRenderer": {
+						"enabled": false
+					}
+				}
+			}
+		}
+	}
+}
+ */
