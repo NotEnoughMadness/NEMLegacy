@@ -18,7 +18,6 @@ namespace NotEnoughMadness.Patches
 
             AssetBundleLoader.Cleanup();
             SceneModLoader.Cleanup();
-            AssemblyLoader.Cleanup();
 
             return true;
         }
@@ -51,8 +50,10 @@ namespace NotEnoughMadness.Patches
                     {
                         AssetBundleLoader.ProcessModBundle(fileInfo);
                     }
+                    
+                    // HANDLED IN VANILLA NOW
                     // CODE EXECUTION (danger 😱😱😱)
-                    if (fileInfo.Extension == ".dll")
+                    /*if (fileInfo.Extension == ".dll")
                     {
                         // dont load if code execution is disabled
                         if (NEMConfig.CodeExecutionModsOn.Value == false)
@@ -63,7 +64,7 @@ namespace NotEnoughMadness.Patches
                         // LOADING ASSEMBLY
 
                         AssemblyLoader.LoadPlugin(fileInfo.Name);
-                    }
+                    }*/
 
                     // ADDITIVE SCENE LOADING
                     // loading more stuff on top of the current scene

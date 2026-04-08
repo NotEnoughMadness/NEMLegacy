@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using HarmonyLib;
-using NotEnoughMadness.Classes;
-using NotEnoughMadness.MapMaking;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static UI_Inventory.InvTab;
@@ -64,7 +62,7 @@ namespace NotEnoughMadness
                     }
                 }
 
-                if (GUILayout.Toggle(toggleBools["InfiniteAmmo"], "Infinite Ammo+Durability") != toggleBools["InfiniteAmmo"])
+                if (GUILayout.Toggle(toggleBools["InfiniteAmmo"], "Infinite Ammo+Melee") != toggleBools["InfiniteAmmo"])
                 {
                     toggleBools["InfiniteAmmo"] = !toggleBools["InfiniteAmmo"];
                 }
@@ -352,6 +350,7 @@ namespace NotEnoughMadness
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             // Fix for disabling god mode on scene transition
+            // todo: make this apply to all squadlings through patches so you dont have to call this
             if (NEMMenu.toggleBools["GodMode"] == true)
             {
                 Controller_Base.PlayerOne.MakeInvincible();
@@ -367,64 +366,6 @@ namespace NotEnoughMadness
 
                 Game_Manager.currentManager.gameObject.AddComponent<InteractiveMode>();
             }
-            
-
-            Debug.Log("NEM: Subscribing events");
-
-            // TODO:
-            // loop through all components here
-            // subscribe them to the events from here depending on what type they are
-            // this is to establish an ORDER OF EXECUTIONNNNNNNN
-            // otherwise everything will fall apart! it already did in fact!!! graaaaagrhghhgrhrrhg 
-
-
-
-
-
-            // TODO:::
-
-            // see if you can write a unity plugin to read bundles from mpn mods dir to display madobjs in the editor
-
-            foreach(var cam in FindObjectsOfType<NEM_Cam_Main>())
-            {
-                MapManager.OnCreateMapComponents += cam.OnCreateMapComponents;
-                MapManager.OnConnectMapComponents += cam.OnConnectMapComponents;
-            }
-
-            foreach(var emitter in FindObjectsOfType<NEM_StudioEventEmitter_Swain>())
-            {
-                MapManager.OnCreateMapComponents += emitter.OnCreateMapComponents;
-                MapManager.OnConnectMapComponents += emitter.OnConnectMapComponents;
-            }
-
-            foreach(var entrance in FindObjectsOfType<NEM_Entrance_Base>())
-            {
-                MapManager.OnCreateMapComponents += entrance.OnCreateMapComponents;
-                MapManager.OnConnectMapComponents += entrance.OnConnectMapComponents;
-            }
-
-            foreach (var assigner in FindObjectsOfType<NEM_Char_DataAssigner>())
-            {
-                MapManager.OnCreateMapComponents += assigner.OnCreateMapComponents;
-                MapManager.OnConnectMapComponents += assigner.OnConnectMapComponents;
-            }
-
-            foreach (var room in FindObjectsOfType<NEM_Room_Main>())
-            {
-                MapManager.OnCreateMapComponents += room.OnCreateMapComponents;
-                MapManager.OnConnectMapComponents += room.OnConnectMapComponents;
-            }
-
-            foreach(var gameManager in FindObjectsOfType<NEM_GameManager>())
-            {
-                MapManager.OnCreateMapComponents += gameManager.OnCreateMapComponents;
-                MapManager.OnConnectMapComponents += gameManager.OnConnectMapComponents;
-            }
-
-            // todo main camera stuff
-
-
-            MapManager.ProcessMapComponents();
         }
     }
 }

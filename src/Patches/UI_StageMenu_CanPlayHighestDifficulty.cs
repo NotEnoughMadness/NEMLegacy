@@ -5,6 +5,9 @@ namespace NotEnoughMadness.Patches
     /// <summary>
     /// Unlocks madness mode by default. Toggle in NEMConfig.cs
     /// </summary>
+    ///
+    // darksignaled
+    /*
     [HarmonyPatch(typeof(UI_StageMenu), "CanPlayHighestDifficulty")]
     class UI_StageMenu_CanPlayHighestDifficulty
     {
@@ -19,6 +22,6 @@ namespace NotEnoughMadness.Patches
 
             return true; // if madness unlocked false, execute original method instead
         }
-    }
+    }*/
 }
 

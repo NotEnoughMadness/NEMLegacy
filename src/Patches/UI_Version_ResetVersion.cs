@@ -2,9 +2,8 @@
 
 namespace NotEnoughMadness.Patches
 {
-    /// <summary>
-    /// Sets the version in the corner of the screen. You can change it in NEMConfig.cs
-    /// </summary>
+    // perhaps not needed for now
+    /*
     [HarmonyPatch(typeof(UI_Version), "ResetVersion")]
     class UI_Version_ResetVersion
     {
@@ -18,5 +17,6 @@ namespace NotEnoughMadness.Patches
             UI_Version.currentWidget.Text_Version.text = NEMConfig.Version;
         }
     }
+    */
 }
 
